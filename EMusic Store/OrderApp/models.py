@@ -1,8 +1,12 @@
 from django.db import models
+from django.db.models import FloatField
+
 from Product.models import Product
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django.utils.safestring import mark_safe
+
+
 # Create your models here.
 
 
@@ -13,12 +17,10 @@ class ShopCart(models.Model):
 
     def price(self):
         return self.product.new_price
- 
-
 
     @property
     def amount(self):
-        return self.quantity*self.product.new_price
+        return self.quantity * self.product.new_price
 
     def __str__(self):
         return self.product.title
@@ -62,6 +64,7 @@ class Order(models.Model):
 
     def image_tag(self):
         return mark_safe('<img src="{}" heights="50" width="40" />'.format(self.transaction_image.url))
+
     image_tag.short_description = 'Image'
 
 
@@ -82,7 +85,7 @@ class OderProduct(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
-    price = models.FloatField()
+    price: FloatField = models.FloatField()
     amount = models.FloatField()
     status = models.CharField(max_length=20, choices=STATUS, default='New')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -92,4 +95,22 @@ class OderProduct(models.Model):
         return self.product.title
 
     def amountnow(self):
-        return self.price*self.quantity
+        return self.price * self.quantity
+
+
+# class Coupon(models.Model):
+#     code = models.CharField(max_length=15)
+#     price = models.FloatField()
+#
+#     def __str__(self):
+#         return self.code
+#
+#
+# class Refund(models.Model):
+#     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+#     reason = models.TextField()
+#     accepted = models.BooleanField(default=False)
+#     email = models.EmailField()
+#
+#     def __str__(self):
+#         return f"{self.pk}"

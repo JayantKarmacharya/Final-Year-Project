@@ -33,10 +33,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'UserApp',
     # General use templates & template tags (should appear first)
+
     'adminlte3',
     # Optional: Django admin theme (must be before django.contrib.admin)
     'adminlte3_theme',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,10 +48,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'ckeditor_uploader',
+
     'EcomApp',
     'Product',
     'OrderApp',
-    'UserApp',
+
     'mptt',
     'crispy_forms',
 
@@ -164,5 +168,5 @@ CKEDITOR_CONFIGS = {
         'toolbar': None,
     },
 }
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ###################################
