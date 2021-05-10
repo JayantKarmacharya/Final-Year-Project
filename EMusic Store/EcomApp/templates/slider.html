@@ -47,13 +47,12 @@
                                 <div class="slider-active owl-carousel">
                                     <!-- Begin Single Slide Area -->
                                     {% for p in sliding_images %}
-                                    	
-                                    
-                                    <div class="single-slide align-center-left animation-style-02 bg-4">
-                                    	<img src="{{p.ImageUrl}}" alt="">
+
+                                    <div class="single-slide align-center-left animation-style-04 bg-4">
+                                    	<img src="{{p.ImageUrl}}" alt="" style="opacity : 0.3" >
                                         <div class="slider-progress"></div>
                                         <div class="slider-content">
-                                            <h5>Sale Offer <span>-20% Off</span> This Week</h5>
+                                            <h5>Quality Product <span>Free delivery</span> For this Week only</h5>
                                             <h2>{{p.title}}
                                         </h2>
                                             <h3>Starting at <span>${{p.new_price}}</span></h3>

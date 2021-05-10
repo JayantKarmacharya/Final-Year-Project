@@ -32,6 +32,8 @@ class ShopingCartForm(ModelForm):
         fields = ['quantity']
 
 
+
+
 class Order(models.Model):
     STATUS = (
         ('New', 'New'),
@@ -58,6 +60,10 @@ class Order(models.Model):
     adminnote = models.CharField(max_length=200, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+    payment_method = models.CharField(
+        max_length=20,  default="Cash On Delivery")
+    payment_completed = models.BooleanField(
+        default=False, null=True, blank=True)
 
     def __str__(self):
         return self.user.first_name

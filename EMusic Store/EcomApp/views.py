@@ -15,7 +15,7 @@ def Home(request):
     for p in cart_product:
         total_amount += p.product.new_price*p.quantity
 
-    sliding_images = Product.objects.all().order_by('id')[:2]
+    sliding_images = Product.objects.all().order_by('id')[:4]
     latest_products = Product.objects.all().order_by('-id')
     products = Product.objects.all()
 
@@ -36,7 +36,9 @@ def Home(request):
 
 def About(request):
 
-    context = {}
+    context = {
+
+    }
     return render(request, 'about.html', context)
 
 

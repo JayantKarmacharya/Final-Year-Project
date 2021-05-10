@@ -52,24 +52,26 @@
                                         <!-- shop-item-filter-list end -->
                                     </div>
                                     <div class="toolbar-amount">
-                                        <span>Showing 1 to 9 of 15</span>
+                                        <span>Showing <h5 class="manufacturer">
+                                                                        <a href="product-details.html">{{p.category}}</a>
+                                                                    </h5></span>
                                     </div>
                                 </div>
                                 <!-- product-select-box start -->
-                                <div class="product-select-box">
-                                    <div class="product-short">
-                                        <p>Sort By:</p>
-                                        <select class="nice-select">
-                                            <option value="trending">Relevance</option>
-                                            <option value="sales">Name (A - Z)</option>
-                                            <option value="sales">Name (Z - A)</option>
-                                            <option value="rating">Price (Low &gt; High)</option>
-                                            <option value="date">Rating (Lowest)</option>
-                                            <option value="price-asc">Model (A - Z)</option>
-                                            <option value="price-asc">Model (Z - A)</option>
-                                        </select>
-                                    </div>
-                                </div>
+<!--                                <div class="product-select-box">-->
+<!--                                    <div class="product-short">-->
+<!--                                        <p>Sort By:</p>-->
+<!--                                        <select class="nice-select">-->
+<!--                                            <option value="trending">Relevance</option>-->
+<!--                                            <option value="sales">Name (A - Z)</option>-->
+<!--                                            <option value="sales">Name (Z - A)</option>-->
+<!--                                            <option value="rating">Price (Low &gt; High)</option>-->
+<!--                                            <option value="date">Rating (Lowest)</option>-->
+<!--                                            <option value="price-asc">Model (A - Z)</option>-->
+<!--                                            <option value="price-asc">Model (Z - A)</option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <!-- product-select-box end -->
                             </div>
                             <!-- shop-top-bar end -->
@@ -114,9 +116,9 @@
                                                             </div>
                                                             <div class="add-actions">
                                                                 <ul class="add-actions-link">
-                                                                    <li class="add-cart active"><a href="shopping-cart.html">Add to cart</a></li>
-                                                                    <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>
-                                                                    <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>
+                                                                    <li class="add-cart active"><a href="{%url 'Add_to_Shoping_cart' id=p.id %}">Add to cart</a></li>
+<!--                                                                    <li><a href="#" title="quick view" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a></li>-->
+<!--                                                                    <li><a class="links-details" href="wishlist.html"><i class="fa fa-heart-o"></i></a></li>-->
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -169,9 +171,9 @@
                                                     <div class="col-lg-4">
                                                         <div class="shop-add-action mb-xs-30">
                                                             <ul class="add-actions-link">
-                                                                <li class="add-cart"><a href="#">Add to cart</a></li>
-                                                                <li class="wishlist"><a href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a></li>
-                                                                <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i>Quick view</a></li>
+                                                                <li class="add-cart"><a href="{%url 'Add_to_Shoping_cart' id=p.id %}">Add to cart</a></li>
+<!--                                                                <li class="wishlist"><a href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a></li>-->
+<!--                                                                <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i>Quick view</a></li>-->
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -183,7 +185,7 @@
                                     <div class="paginatoin-area">
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6">
-                                                <p>Showing 1-12 of 13 item(s)</p>
+                                                <p>Showing item(s)</p>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <ul class="pagination-box">

@@ -47,15 +47,7 @@ class UserUpdateForm(UserChangeForm):
         }
 
 
-CITY = [
-    ('Dhaka', 'Dhaka'),
-    ('Mymensign', 'Mymensign'),
-    ('Rajshahi', 'Rajshahi'),
-    ('Rangpur', 'Rangpur'),
-    ('Barisal', 'Barisal'),
-    ('Chottogram', 'Chottogram'),
-    ('Khulna', 'Khulna'),
-]
+CITY = []
 
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -65,7 +57,7 @@ class ProfileUpdateForm(forms.ModelForm):
         widgets = {
             'phone': TextInput(attrs={'class': 'input', 'placeholder': 'phone'}),
             'address': TextInput(attrs={'class': 'input', 'placeholder': 'address'}),
-            'city': Select(attrs={'class': 'input', 'placeholder': 'city'}, choices=CITY),
+            'city': TextInput(attrs={'class': 'input', 'placeholder': 'city'}),
             'country': TextInput(attrs={'class': 'input', 'placeholder': 'country'}),
             'image': FileInput(attrs={'class': 'input', 'placeholder': 'image', }),
         }
