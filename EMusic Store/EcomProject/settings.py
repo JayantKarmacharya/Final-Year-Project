@@ -175,5 +175,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'outkast045@gmail.com'
 EMAIL_HOST_PASSWORD = 'Pred@tor2010'
-
+DEFAULT_FROM_EMAIL="E-Music Store <outkast045@gmail.com>"
 ###################################

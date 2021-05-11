@@ -77,7 +77,7 @@ def SearchView(request):
                 products = Product.objects.filter(
                     title__icontains=query, category_id=cat_id)
             category = Category.objects.all()
-            sliding_images = Product.objects.all().order_by('id')[:2]
+            sliding_images = Product.objects.all().order_by('id')[:4]
             setting = Setting.objects.get(pk=1)
             context = {
                 'category': category,
@@ -95,7 +95,7 @@ def product_single(request, id):
     setting = Setting.objects.get(id=1)
     product = Product.objects.get(id=id)
     images = Images.objects.filter(product_id=id)
-    products = Product.objects.all().order_by('id')[:4]
+    products = Product.objects.all().order_by('id')[:7]
     comment_show = Comment.objects.filter(product_id=id, status='True')
 
     context = {
@@ -144,7 +144,7 @@ def ajaxcolor(request):
 def category_product(request, id, slug):
     category = Category.objects.all()
     setting = Setting.objects.get(id=1)
-    sliding_images = Product.objects.all().order_by('id')[:2]
+    sliding_images = Product.objects.all().order_by('id')[:4]
     prouct_cat = Product.objects.filter(category_id=id)
     context = {
         'category': category,
