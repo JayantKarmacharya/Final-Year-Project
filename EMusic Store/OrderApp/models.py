@@ -30,7 +30,10 @@ class ShopingCartForm(ModelForm):
     class Meta:
         model = ShopCart
         fields = ['quantity']
-
+METHOD = (
+    ("Cash On Delivery", "Cash On Delivery"),
+    ("Esewa", "Esewa"),
+)
 
 
 
@@ -61,7 +64,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     payment_method = models.CharField(
-        max_length=20,  default="Cash On Delivery")
+        max_length=20, choices=METHOD, default="Cash On Delivery")
     payment_completed = models.BooleanField(
         default=False, null=True, blank=True)
 
@@ -103,7 +106,10 @@ class OderProduct(models.Model):
     def amountnow(self):
         return self.price * self.quantity
 
-
+class CheckoutForm(ModelForm):
+    class Meta:
+        model = Order
+        fields = ["payment_method"]
 # class Coupon(models.Model):
 #     code = models.CharField(max_length=15)
 #     price = models.FloatField()

@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import Home, product_single, category_product, About, contact, SearchView, Faq_details
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', Home, name='home'),
@@ -11,5 +12,9 @@ urlpatterns = [
     path('search/', SearchView, name='SearchView'),
     path('faq/', Faq_details, name='Faq_details'),
 
-
 ]
+if settings.DEBUG:
+    urlpatterns+=static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+    urlpatterns+=static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

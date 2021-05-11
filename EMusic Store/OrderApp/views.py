@@ -1,15 +1,22 @@
 import code
 
 from django.shortcuts import render, HttpResponse, redirect, HttpResponseRedirect, reverse
-from django.views.generic import View
+from django.views.generic import View , CreateView
 # from OrderApp.forms import CouponForm, RefundForm
 from Product.models import Category, Product, Images
 from django.contrib import messages
-from OrderApp.models import ShopCart, ShopingCartForm, OderForm, Order, OderProduct
+from OrderApp.models import ShopCart, ShopingCartForm, OderForm, Order, OderProduct, CheckoutForm
 from EcomApp.models import Setting, ContactMessage, ContactForm
 from UserApp.models import UserProfile
+# from OrderApp.forms import CheckoutForm
 from django.contrib.auth.decorators import login_required
 from django.utils.crypto import get_random_string
+from django.urls import reverse_lazy, reverse
+
+import requests
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
@@ -251,7 +258,7 @@ class EsewaVerifyView(View):
             'rid': refId,
             'pid': oid,
         }
-        resp = requests.post(url, d)
+        resp = request.post(url, d)
         root = ET.fromstring(resp.content)
         status = root[0].text.strip()
 
@@ -264,6 +271,67 @@ class EsewaVerifyView(View):
         else:
 
             return redirect("/esewa-request/?o_id="+order_id)
+
+class CheckoutView(CreateView):
+    template_name = "user_order_details.html"
+    form_class = CheckoutForm
+    success_url = reverse_lazy("EcomApp:home")
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.customer:
+            pass
+        else:
+            return redirect("/login/?next=/checkout/")
+        return super().dispatch(request, *args, **kwargs)
+
+
+
+    def form_valid(self, ckform):
+        cart_id = self.request.session.get("cart_id")
+        if cart_id:
+
+            pm = ckform.cleaned_data.get("payment_method")
+            order = ckform.save()
+            if pm == "Esewa":
+                return redirect(reverse("ecomapp:khaltirequest") + "?o_id=" + str(order.id))
+            elif pm == "Esewa":
+                return redirect(reverse("ecomapp:esewarequest") + "?o_id=" + str(order.id))
+        else:
+            return redirect("EcomApp:home")
+        return super().form_valid(ckform)
+
+
+@csrf_exempt
+def verify_payment(request):
+    data = request.POST
+    product_id = data['product_identity']
+    token = data['token']
+    amount = data['amount']
+
+    url = "https://khalti.com/api/v2/payment/verify/"
+    payload = {
+        "token": token,
+        "amount": amount
+    }
+    headers = {
+        "Authorization": "Key test_secret_key_165ce92d5e9646e7b945e9f9fcaff883"
+    }
+
+    response = requests.post(url, payload, headers=headers)
+
+    response_data = json.loads(response.text)
+    status_code = str(response.status_code)
+
+    if status_code == '400':
+        response = JsonResponse({'status': 'false', 'message': response_data['detail']}, status=500)
+        return response
+
+    import pprint
+    pp = pprint.PrettyPrinter(indent=4)
+    pp.pprint(response_data)
+
+    return JsonResponse(f"Payment Done !! With IDX. {response_data['user']['idx']}", safe=False)
+
 
 
 # def get_coupon(request, id):

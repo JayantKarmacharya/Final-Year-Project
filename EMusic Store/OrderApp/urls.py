@@ -2,7 +2,7 @@ from django.urls import path
 from OrderApp.views import(
     Add_to_Shoping_cart, cart_detials, cart_delete,
     OrderCart, Order_showing, Order_Product_showing,
-    user_oder_details, useroderproduct_details, EsewaRequestView, EsewaVerifyView
+    user_oder_details, useroderproduct_details, EsewaRequestView, EsewaVerifyView,verify_payment
 
 )
 urlpatterns = [
@@ -19,6 +19,8 @@ urlpatterns = [
 
     path("esewa-request/", EsewaRequestView.as_view(), name="esewarequest"),
     path("esewa-verify/", EsewaVerifyView.as_view(), name="esewaverify"),
+    path('verify_payment',verify_payment,name='verify_payment')
+
 
 
     # path('add-coupon/', AddCouponView.as_view(), name='add-coupon'),
